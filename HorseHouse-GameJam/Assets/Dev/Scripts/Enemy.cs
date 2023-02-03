@@ -42,6 +42,9 @@ public class Enemy : Character
 
     void Attack()
     {
+        moveDir.x = 0.0f;
+        moveDir.y = 0.0f;
+
         ticks += Time.deltaTime;
         if(ticks >= INTERVAL)
         {
@@ -52,7 +55,7 @@ public class Enemy : Character
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collide");
+
         if(collision.gameObject.tag == "Player")
         {
             currState = State.Attack;
