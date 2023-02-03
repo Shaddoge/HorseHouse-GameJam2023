@@ -12,11 +12,14 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField] private GameState state;
+    public GameState State =>state;
+
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -26,5 +29,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+    private void OnEnable()
+    {
+        EventManager.Instance.gameStateChange += SetState;
+    }
+
+    private void SetState(GameState _state)
+    {
+        state = _state;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.gameStateChange -= SetState;
     }
 }
