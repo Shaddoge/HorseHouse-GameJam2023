@@ -37,12 +37,14 @@ public class Enemy : Character
 
     void Move()
     {
-        Vector2 playerDir = player.transform.position - this.transform.position;
+        /*Vector2 playerDir = player.transform.position - this.transform.position;
         moveDir.x = playerDir.x * getMovespeed();
         moveDir.y = playerDir.y * getMovespeed();
         float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
         //this.getRigidBody().rotation = angle;
-        ticks = 0.0f;
+        ticks = 0.0f;*/
+
+
     }
 
     void Attack()
