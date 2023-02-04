@@ -24,35 +24,54 @@ public class Laser : Projectile
 
     private void Update()
     {
-        // Raycast
+       
         Vector2 fireDir = (weapon.aimPos - (Vector2)weapon.FirePoint.position).normalized;
         Vector2 endPos = (Vector2)weapon.FirePoint.position + (fireDir * range);
-
+        // Linecast
         RaycastHit2D[] hit = Physics2D.LinecastAll(weapon.FirePoint.position, endPos);
         
         if (hit.Length > 0)
         {
             Vector2 wallHit = Vector2.zero;
+            bool enemyHit = false;
+            // Check for walls first before damaging enemies
             for (int i = 0; i < hit.Length; i++)
             {
-                if (hit[i].transform.gameObject.CompareTag("Enemy"))
-                {
-                    Enemy enemy = hit[i].transform.GetComponent<Enemy>();
-                    enemy.TakeDamage(damage);
-                    
-                    canDamage = false;
-                }
-                else if(hit[i].transform.gameObject.CompareTag("Wall"))
+                if(hit[i].transform.gameObject.CompareTag("Wall"))
                 {
                     wallHit = hit[i].point;
                 }
             }
+
+            // Cut the line and recalculate linecast
             if (wallHit != Vector2.zero)
             {
                 RepositionLine(weapon.FirePoint.position, wallHit);
+                // Linecast
+                hit = Physics2D.LinecastAll(weapon.FirePoint.position, wallHit);
             }
             else
+            {
                 RepositionLine(weapon.FirePoint.position, endPos);
+            }
+
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (canDamage && hit[i].transform.gameObject.CompareTag("Enemy"))
+                {
+                    Enemy enemy = hit[i].transform.GetComponent<Enemy>();
+                    enemy.TakeDamage(damage);
+
+                    enemyHit = true;
+                }
+            }
+            // Damage cooldown
+            if (enemyHit)
+            {
+                canDamage = false;
+                StartCoroutine(DamageCooldown());
+            }
+            
         }
         else
             RepositionLine(weapon.FirePoint.position, endPos);
