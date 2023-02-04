@@ -5,8 +5,6 @@ using UnityEngine;
 public class Enemy : Character
 {
     [SerializeField] Player player;
-    [SerializeField] Rigidbody2D rigidBody;
-
     enum State { Move, Attack};
     State currState = State.Move;
 
@@ -17,7 +15,7 @@ public class Enemy : Character
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        rigidBody = this.GetComponent<Rigidbody2D>(); //Use rb from parent
+        setMovespeed(Random.Range(0.5f, 0.8f));
     }
 
     // Update is called once per frame
@@ -33,10 +31,10 @@ public class Enemy : Character
     void Move()
     {
         Vector2 playerDir = player.transform.position - this.transform.position;
-        moveDir.x = playerDir.x * 0.2f; //Change to move speed
-        moveDir.y = playerDir.y * 0.2f;
+        moveDir.x = playerDir.x * getMovespeed(); //Change to move speed
+        moveDir.y = playerDir.y * getMovespeed();
         float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
-        this.rigidBody.rotation = angle;
+        this.getRigidBody().rotation = angle;
         ticks = 0.0f;
     }
 
@@ -49,6 +47,7 @@ public class Enemy : Character
         if(ticks >= INTERVAL)
         {
             Debug.Log("Attack Player");
+            //+Damage player
             ticks = 0.0f;
         }
     }
@@ -58,6 +57,7 @@ public class Enemy : Character
 
         if(collision.gameObject.tag == "Player")
         {
+            //+Damage player
             currState = State.Attack;
         }
     }
@@ -76,15 +76,5 @@ public class Enemy : Character
         {
             currState = State.Move;
         }
-    }
-
-    public void TakeDamage(int damage) 
-    {
-       
-    }
-
-    void Die()
-    {
-        Destroy(this); 
     }
 }

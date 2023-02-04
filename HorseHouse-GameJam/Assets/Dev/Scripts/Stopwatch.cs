@@ -24,7 +24,7 @@ public class Stopwatch : MonoBehaviour
             currTime = currTime + Time.deltaTime;
         }
         TimeSpan time = TimeSpan.FromSeconds(currTime);
-        timerText.text = time.ToString(@"mm\:ss\:fff");
+        timerText.text = time.ToString(@"mm\:ss\:ff");
 
     }
     //Add Handler for Pausing Time
