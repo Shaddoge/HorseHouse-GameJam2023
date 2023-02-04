@@ -12,6 +12,7 @@ public class Enemy : Character
 
     float ticks = 0.0f;
     const float INTERVAL = 2.0f;
+    private bool isTransition = false;
 
     Action<Enemy> killAction;
 
@@ -21,7 +22,14 @@ public class Enemy : Character
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         setMovespeed(UnityEngine.Random.Range(0.5f, 0.8f));
     }
-
+    private void OnEnable()
+    {
+        EventManager.Instance.isTransitioning += IsTransitioning;
+    }
+    private void OnDisable()
+    {
+        EventManager.Instance.isTransitioning -= IsTransitioning;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -90,7 +98,6 @@ public class Enemy : Character
 
     public override void Die()
     {
-
         killAction(this);
         EventManager.Instance.EnemyDeath(1, transform.position);
         health = maxHealth;
@@ -100,5 +107,17 @@ public class Enemy : Character
     public void Init(Action<Enemy> _killAction)
     {
         killAction = _killAction;
+    }
+
+    public void IsTransitioning()
+    {
+        isTransition = true;
+        StartCoroutine(ResetTransitioning());
+    }
+
+    IEnumerator ResetTransitioning()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isTransition = false;
     }
 }

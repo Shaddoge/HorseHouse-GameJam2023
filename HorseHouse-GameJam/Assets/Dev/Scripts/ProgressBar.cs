@@ -49,6 +49,8 @@ public class ProgressBar : MonoBehaviour
                 maximum -= 10;
             }
             transition.SetActive(true);
+            //In Case of Emergencies
+            //EventManager.Instance.IsTransitioning();
             StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
 
