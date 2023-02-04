@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 
     IEnumerator ResetSpriteColor()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 

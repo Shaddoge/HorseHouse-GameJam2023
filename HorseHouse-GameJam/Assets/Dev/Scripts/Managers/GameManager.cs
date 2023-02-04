@@ -57,4 +57,13 @@ public class GameManager : MonoBehaviour
     {
         EventManager.Instance.gameStateChange -= SetState;
     }
+    public void ChangeEra()
+    {
+        if(currentEra!=Era.Stone)
+            currentEra++;
+        else
+        {
+            Debug.Log("Game Over");
+        }
+    }
 }

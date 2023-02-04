@@ -56,6 +56,7 @@ public class Enemy : Character
             Debug.Log("Attack Player");
             //+Damage player
             ticks = 0.0f;
+            EventManager.Instance.TakeDamage(1);
         }
     }
 
