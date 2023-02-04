@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  currentEra: 0
 --- !u!114 &360035399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,7 +975,6 @@ MonoBehaviour:
   - {fileID: 1961079984}
   - {fileID: 810601717}
   - {fileID: 215637244}
-  dead: 0
 --- !u!1 &392125630
 GameObject:
   m_ObjectHideFlags: 0

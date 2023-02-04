@@ -13,6 +13,16 @@ public class ProgressBar : MonoBehaviour
     public Image fill;
     public Color color;
 
+
+    private void OnEnable()
+    {
+        EventManager.Instance.enemyDeath += UpdateProgressBar;
+    }
+    private void OnDisable()
+    {
+        EventManager.Instance.enemyDeath -= UpdateProgressBar;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +43,9 @@ public class ProgressBar : MonoBehaviour
         mask.fillAmount = fillAmount;
 
         fill.color = color;
+    }
+    private void UpdateProgressBar(float progress, Vector2 position)
+    {
+        Debug.Log("Entered");
     }
 }

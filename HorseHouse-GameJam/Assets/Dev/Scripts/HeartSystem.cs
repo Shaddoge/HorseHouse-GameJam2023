@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class HeartSystem : MonoBehaviour
 {
     public Image[] hearts;
-    public bool dead;
 
     private void Start()
     {
@@ -24,10 +23,7 @@ public class HeartSystem : MonoBehaviour
 
     void Update()
     {
-        if (dead == true)
-        {
-            // add dead condition
-        }
+
     }
     
     public void UpdateHealth(int health)
