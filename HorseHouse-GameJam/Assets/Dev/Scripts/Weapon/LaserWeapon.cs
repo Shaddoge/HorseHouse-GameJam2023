@@ -6,7 +6,10 @@ public class LaserWeapon : RangedWeapon
 {
     // Laser instance
     [SerializeField] private Laser laser;
-
+    // Values
+    [SerializeField] private float dmgInterval = 0.1f;
+    private bool canDamage = true;
+    
     public override void StartFire()
     {
         base.StartFire();
@@ -20,12 +23,8 @@ public class LaserWeapon : RangedWeapon
 
     public override void OnUpdate()
     {
+        base.OnUpdate();
         if (!isFiring) return;
-        RepositionLaser();
-    }
-
-    private void RepositionLaser()
-    {
-        
+        //laser.RepositionLine((Vector2)firePoint.position, aimPos);
     }
 }
