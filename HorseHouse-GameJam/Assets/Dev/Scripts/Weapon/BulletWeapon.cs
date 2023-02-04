@@ -52,7 +52,7 @@ public class BulletWeapon : RangedWeapon
     {
         bullet.ToggleLine(true);
         bullet.Fire();
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.02f);
         bullet.ToggleLine(false);
     }
 }
