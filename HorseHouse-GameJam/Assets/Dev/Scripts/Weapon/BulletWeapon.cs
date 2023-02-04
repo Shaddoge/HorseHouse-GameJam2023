@@ -40,7 +40,6 @@ public class BulletWeapon : RangedWeapon
         if (!canFire && cdTicks < fireRate)
         {
             cdTicks += Time.deltaTime;
-            Debug.Log(cdTicks);
             if (cdTicks >= fireRate)
             {
                 canFire = true;

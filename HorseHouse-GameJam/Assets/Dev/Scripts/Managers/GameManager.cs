@@ -60,13 +60,15 @@ public class GameManager : MonoBehaviour
     public void ChangeEra()
     {
         if(currentEra!=Era.Stone)
+        {
             currentEra++;
+            EventManager.Instance.IsTransitioning();
+        }
         else
         {
             Debug.Log("Game Over");
             state = GameState.GameOver;
         }
         Debug.Log("Era Changed: " + currentEra);
-
     }
 }
