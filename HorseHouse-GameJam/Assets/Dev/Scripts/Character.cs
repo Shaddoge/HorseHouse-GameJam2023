@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class Character : MonoBehaviour
         sprite = this.GetComponent<Sprite>();
         rigidBody = this.GetComponent<Rigidbody2D>();
     }
-    public Rigidbody2D getRigidBody() 
+    public Rigidbody2D getRigidBody()
     {
         return this.rigidBody;
     }
@@ -43,26 +44,28 @@ public class Character : MonoBehaviour
         rigidBody.MovePosition(newPos);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         this.GetComponent<SpriteRenderer>().color = new Color(171 / 255.0f, 45 / 255.0f, 36 / 255.0f);
         StartCoroutine(ResetSpriteColor());
         this.health -= damage;
-        if(this.health <= 0)
+        if (this.health <= 0)
         {
             this.health = 0;
+
             Die();
         }
     }
 
     IEnumerator ResetSpriteColor()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 
-    void Die()
+    public virtual void Die()
     {
         Destroy(this.gameObject);
     }
+
 }

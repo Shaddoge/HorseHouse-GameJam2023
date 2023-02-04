@@ -12,12 +12,12 @@ public class LaserWeapon : RangedWeapon
     public override void StartFire()
     {
         base.StartFire();
-        laser.gameObject.SetActive(true);
+        laser.ToggleLaser(true);
     }
     public override void StopFire()
     {
         base.StopFire();
-        laser.gameObject.SetActive(false);
+        laser.ToggleLaser(false);
     }
 
     public override void OnUpdate()

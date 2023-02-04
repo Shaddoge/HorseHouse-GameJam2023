@@ -7,7 +7,15 @@ using UnityEngine;
 public enum GameState
 {
     None,
-    Paused
+    Paused,
+    GameOver
+}
+[Serializable]
+public enum Era
+{
+    Space,
+    Modern,
+    Stone
 }
 
 public class GameManager : MonoBehaviour
@@ -15,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameState state;
     public GameState State =>state;
+
+    [SerializeField] private Era currentEra;
+    public Era CurrentEra =>currentEra;
 
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -29,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        currentEra = Era.Space;
     }
     private void OnEnable()
     {
@@ -44,5 +56,14 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.Instance.gameStateChange -= SetState;
+    }
+    public void ChangeEra()
+    {
+        if(currentEra!=Era.Stone)
+            currentEra++;
+        else
+        {
+            Debug.Log("Game Over");
+        }
     }
 }
