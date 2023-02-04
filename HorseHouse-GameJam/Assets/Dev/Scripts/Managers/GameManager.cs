@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        Debug.Log(EventManager.Instance);
         EventManager.Instance.gameStateChange += SetState;
     }
 
