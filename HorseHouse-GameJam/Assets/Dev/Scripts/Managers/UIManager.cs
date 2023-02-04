@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] GameObject PausePanel;
     public void OnPlayPressed()
     {
         SceneManager.LoadScene(1);
@@ -16,5 +17,24 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void OnPausePressed()
+    {
+        if(!PausePanel.activeSelf) { 
+            PausePanel.SetActive(true);
+            Time.timeScale = 0.0f;
+            EventManager.Instance.GameStateChange(GameState.Paused);
+        }
+    }
+
+    public void OnResumePressed()
+    {
+        if (PausePanel.activeSelf)
+        {
+            PausePanel.SetActive(false);
+            Time.timeScale = 1.0f;
+            EventManager.Instance.GameStateChange(GameState.None);
+        }
     }
 }
