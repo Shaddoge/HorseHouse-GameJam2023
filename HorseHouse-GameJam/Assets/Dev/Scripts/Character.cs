@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class Character : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     // Stats
-    [SerializeField] private int health;
+    [SerializeField] protected int health;
+    [SerializeField] protected int maxHealth;
     [SerializeField] private float moveSpeed;
 
     // Movement
@@ -23,11 +25,47 @@ public class Character : MonoBehaviour
         sprite = this.GetComponent<Sprite>();
         rigidBody = this.GetComponent<Rigidbody2D>();
     }
+    public Rigidbody2D getRigidBody()
+    {
+        return this.rigidBody;
+    }
+    public float getMovespeed()
+    {
+        return this.moveSpeed;
+    }
 
+    public void setMovespeed(float speed)
+    {
+        this.moveSpeed = speed;
+    }
     private void FixedUpdate()
     {
         Vector2 newPos = rigidBody.position + (moveDir * moveSpeed * Time.fixedDeltaTime);
         rigidBody.MovePosition(newPos);
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(171 / 255.0f, 45 / 255.0f, 36 / 255.0f);
+        StartCoroutine(ResetSpriteColor());
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            this.health = 0;
+
+            Die();
+        }
+    }
+
+    IEnumerator ResetSpriteColor()
+    {
+        yield return new WaitForSeconds(0.05f);
+        this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
+    }
+
+    public virtual void Die()
+    {
+        Destroy(this.gameObject);
     }
 
 }
