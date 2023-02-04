@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,14 @@ public class EventManager : MonoBehaviour
     #region Game
     public event Action<GameState> gameStateChange;
     public void GameStateChange(GameState state) { gameStateChange?.Invoke(state); }
+    public event Action<int> takeDamage;
+    public void TakeDamage(int health) { takeDamage?.Invoke(health); }
+    public event Action<int> updateHealth;
+    public void UpdateHealth(int health) { updateHealth?.Invoke(health); }
+    public event Action<int,Vector2> enemyDeath;
+    public void EnemyDeath(int progress, Vector2 position) { enemyDeath?.Invoke(progress, position); }
+    public event Action isTransitioning;
+    public void IsTransitioning() { isTransitioning?.Invoke(); }
     #endregion
 
 }
