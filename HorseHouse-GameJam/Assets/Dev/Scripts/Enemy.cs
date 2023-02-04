@@ -28,6 +28,11 @@ public class Enemy : Character
             case State.Move: Move(); break;
             case State.Attack: Attack(); break;
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            TakeDamage(1);
+        }
     }
 
     void Move()
@@ -78,20 +83,20 @@ public class Enemy : Character
         }
     }
 
-    public void TakeDamage(int damage) 
-    {
-        this.GetComponent<SpriteRenderer>().color = new Color(171/255.0f, 45/255.0f, 36/255.0f);
-        StartCoroutine(ResetSpriteColor());
-    }
+    //public void TakeDamage(int damage) 
+    //{
+    //    this.GetComponent<SpriteRenderer>().color = new Color(171/255.0f, 45/255.0f, 36/255.0f);
+    //    StartCoroutine(ResetSpriteColor());
+    //}
 
-    IEnumerator ResetSpriteColor()
-    {
-        yield return new WaitForSeconds(0.2f);
-        this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
-    }
+    //IEnumerator ResetSpriteColor()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
+    //}
 
-    void Die()
-    {
-        Destroy(this); 
-    }
+    //void Die()
+    //{
+    //    Destroy(this); 
+    //}
 }
