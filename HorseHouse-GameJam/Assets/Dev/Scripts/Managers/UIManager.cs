@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     public void OnPausePressed()
     {
-        if(!PausePanel.activeSelf) { 
+        if(!PausePanel.activeSelf && GameManager.Instance.State != GameState.GameOver) { 
             PausePanel.SetActive(true);
             Time.timeScale = 0.0f;
             EventManager.Instance.GameStateChange(GameState.Paused);

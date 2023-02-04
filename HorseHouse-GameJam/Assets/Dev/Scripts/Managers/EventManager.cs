@@ -28,6 +28,8 @@ public class EventManager : MonoBehaviour
     public void TakeDamage(int health) { takeDamage?.Invoke(health); }
     public event Action<int> updateHealth;
     public void UpdateHealth(int health) { updateHealth?.Invoke(health); }
+    public event Action<int,Vector2> enemyDeath;
+    public void EnemyDeath(int progress, Vector2 position) { enemyDeath?.Invoke(progress, position); }
     #endregion
 
 }
