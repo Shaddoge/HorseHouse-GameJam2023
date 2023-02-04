@@ -12,15 +12,23 @@ public class CrosshairBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Input.mousePosition;
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(GameManager.Instance.State == GameState.Paused)
         {
             Cursor.visible = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Escape))
+        else
         {
             Cursor.visible = false;
+            transform.position = Input.mousePosition;
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cursor.visible = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                Cursor.visible = false;
+            }
         }
     }
 }
