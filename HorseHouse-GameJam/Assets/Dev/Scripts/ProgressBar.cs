@@ -8,7 +8,7 @@ public class ProgressBar : MonoBehaviour
 {
     public int minimum;
     public int maximum;
-    public int current;
+    public int current = 0;
     public Image mask;
     public Image fill;
     public Color color;
@@ -44,8 +44,8 @@ public class ProgressBar : MonoBehaviour
 
         fill.color = color;
     }
-    private void UpdateProgressBar(float progress, Vector2 position)
+    private void UpdateProgressBar(int progress, Vector2 position)
     {
-        Debug.Log("Entered");
+        current += progress;
     }
 }
