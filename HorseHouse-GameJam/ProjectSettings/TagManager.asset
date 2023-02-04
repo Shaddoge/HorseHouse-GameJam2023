@@ -53,3 +53,6 @@ TagManager:
   - name: Projectiles
     uniqueID: 793078673
     locked: 0
+  - name: Transition
+    uniqueID: 3853568875
+    locked: 0
