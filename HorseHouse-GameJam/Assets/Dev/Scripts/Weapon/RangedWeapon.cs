@@ -12,14 +12,29 @@ public enum FireType
     Auto, // Laser, SMG/Rifle, etc.
 }
 
-[RequireComponent(typeof(Sprite))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class RangedWeapon : MonoBehaviour
 {
+    // References
+    private Player player;
     // Values
     [SerializeField] private FireType fireType = FireType.Single;
+    [SerializeField] protected Transform firePoint;
+    public Transform FirePoint { get { return firePoint; } }
 
     protected bool isFiring = false;
-    private Vector3 aimDirection = Vector2.zero;
+    public Vector2 aimPos = Vector2.zero;
+
+    private void Awake()
+    {
+        if (firePoint == null)
+            firePoint = this.transform;
+    }
+
+    public void Setup(Player player)
+    {
+        this.player = player;
+    }
 
     public virtual void StartFire()
     {
@@ -33,21 +48,17 @@ public class RangedWeapon : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-        Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-        aimDirection = transform.position - lookPos;
-        Debug.Log(aimDirection);
-        Debug.DrawRay(transform.position, aimDirection * 10, Color.red);
         OnUpdate();
     }
-
+    
     public virtual void OnUpdate()
     {
-        
+        if (player == null) return;
+        transform.right = (player.pointerPos - (Vector2)transform.position).normalized;
     }
 
-    public void OnDrawGizmos()
+    public void SetAimPos(Vector2 pos)
     {
-        
+        aimPos = pos;
     }
 }
