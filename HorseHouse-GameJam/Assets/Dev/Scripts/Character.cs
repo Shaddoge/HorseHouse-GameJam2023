@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
     {
         this.moveSpeed = speed;
     }
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Vector2 newPos = rigidBody.position + (moveDir * moveSpeed * Time.fixedDeltaTime);
         rigidBody.MovePosition(newPos);
