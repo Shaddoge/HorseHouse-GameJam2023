@@ -4,15 +4,55 @@ using UnityEngine;
 
 public class BulletWeapon : RangedWeapon
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private float fireRate = 0.2f;
+    private float cdTicks = 0.0f;
+    private bool canFire = true;
+    
+    public override void StartFire()
     {
-        
+        base.StartFire();
+        if (canFire)
+        {
+            Shoot();
+        }
+    }
+    public override void StopFire()
+    {
+        base.StopFire();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Shoot()
     {
-        
+        if (!canFire) return;
+        canFire = false;
+        StartCoroutine(SimulateBullet());
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (!canFire && cdTicks < fireRate)
+        {
+            cdTicks += Time.deltaTime;
+            Debug.Log(cdTicks);
+            if (cdTicks >= fireRate)
+            {
+                canFire = true;
+                cdTicks = 0.0f;
+                if (isFiring)
+                {
+                    Shoot();
+                }
+            }
+        }
+    }
+
+    private IEnumerator SimulateBullet()
+    {
+        bullet.ToggleLine(true);
+        bullet.Fire();
+        yield return new WaitForSeconds(0.05f);
+        bullet.ToggleLine(false);
     }
 }
