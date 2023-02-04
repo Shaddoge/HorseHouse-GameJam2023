@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Enemy prefab;
+    [SerializeField] private Enemy[] prefabs;
     [SerializeField] private int spawnAmount = 2;
     [SerializeField] private bool usePool;
 
@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         pool = new ObjectPool<Enemy>(() =>
         {
-            return Instantiate(prefab);
+            return Instantiate(prefabs[Random.Range(0,3)]);
         }, enemy =>
         {
             enemy.gameObject.SetActive(true);
