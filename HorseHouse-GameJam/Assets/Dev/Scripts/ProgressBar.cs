@@ -46,6 +46,15 @@ public class ProgressBar : MonoBehaviour
     }
     private void UpdateProgressBar(int progress, Vector2 position)
     {
+        if(current == maximum)
+        {
+            current = 0;
+            if(maximum > 0)
+            {
+                maximum -= 10;
+            }
+            GameManager.Instance.ChangeEra();
+        }
         current += progress;
     }
 }
