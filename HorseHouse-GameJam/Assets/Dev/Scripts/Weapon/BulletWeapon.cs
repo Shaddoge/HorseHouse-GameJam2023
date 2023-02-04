@@ -6,6 +6,9 @@ public class BulletWeapon : RangedWeapon
 {
     [SerializeField] private Bullet bullet;
     [SerializeField] private float fireRate = 0.2f;
+    [SerializeField] private ParticleSystem muzzleVFX;
+    [SerializeField] private ParticleSystem smokeVFX;
+
     private float cdTicks = 0.0f;
     private bool canFire = true;
     
@@ -27,6 +30,8 @@ public class BulletWeapon : RangedWeapon
         if (!canFire) return;
         canFire = false;
         StartCoroutine(SimulateBullet());
+        muzzleVFX.Emit(12);
+        smokeVFX.Emit(5);
     }
 
     public override void OnUpdate()
