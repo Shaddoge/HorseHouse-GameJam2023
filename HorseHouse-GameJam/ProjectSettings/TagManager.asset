@@ -7,6 +7,7 @@ TagManager:
   - Weapon
   - Enemy
   - Wall
+  - PlayerSprite
   layers:
   - Default
   - TransparentFX
@@ -52,6 +53,9 @@ TagManager:
     locked: 0
   - name: Projectiles
     uniqueID: 793078673
+    locked: 0
+  - name: HP Bar
+    uniqueID: 1381723813
     locked: 0
   - name: Transition
     uniqueID: 3853568875

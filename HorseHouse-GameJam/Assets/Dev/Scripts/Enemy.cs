@@ -8,6 +8,7 @@ public class Enemy : Character
 {
     private Vector3 target;
     NavMeshAgent agent;
+    private SpriteRenderer sprite;
 
     [SerializeField] Player player;
     [SerializeField] public GameObject hpBar;
@@ -19,11 +20,19 @@ public class Enemy : Character
 
     Action<Enemy> killAction;
 
+    private Color32 origColor;
+
     private void Awake()
     {
+        sprite = this.GetComponent<SpriteRenderer>();
         agent = GetComponent<NavMeshAgent>();
         /*agent.updateRotation = false;
         agent.updateUpAxis = false;*/
+    }
+
+    private void OnEnable()
+    {
+        origColor = sprite.color;
     }
 
     // Start is called before the first frame update
@@ -31,8 +40,6 @@ public class Enemy : Character
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         setMovespeed(UnityEngine.Random.Range(0.5f, 0.8f));
-
-
     }
 
     // Update is called once per frame
@@ -43,8 +50,6 @@ public class Enemy : Character
             case State.Move: Move(); break;
             case State.Attack: Attack(); break;
         }
-
-
         hpBar.GetComponent<EnemyHPBar>().SetHealth(this.health, this.maxHealth);
     }
 
@@ -104,6 +109,13 @@ public class Enemy : Character
         }
     }
 
+    public override void TakeDamage(int damage)
+    {
+        if (health - damage > 0)
+            StartCoroutine(DamageFeedback());
+        base.TakeDamage(damage);
+    }
+
     public override void Die()
     {
 
@@ -121,5 +133,12 @@ public class Enemy : Character
     public override void FixedUpdate()
     {
         return;
+    }
+
+    private IEnumerator DamageFeedback()
+    {
+        sprite.color = new Color32(230, 60, 60, 255);
+        yield return new WaitForSeconds(0.05f);
+        sprite.color = origColor;
     }
 }

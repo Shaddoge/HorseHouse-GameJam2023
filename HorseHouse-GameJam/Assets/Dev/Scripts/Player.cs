@@ -7,14 +7,16 @@ public class Player : Character
 {
     // References
     private RangedWeapon weapon = null;
-    
+    private Animator animator = null;
+
     // Values
-    public Vector2 pointerPos = Vector3.zero;
+    [HideInInspector] public Vector2 pointerPos = Vector3.zero;
 
     private void Start()
     {
         Debug.Log("Player Health" + this.health);
         weapon = GameObject.FindGameObjectWithTag("Weapon").GetComponent<RangedWeapon>();
+        animator = GetComponentInChildren<Animator>();
         if (weapon != null)
         {
             weapon.Setup(this);
@@ -43,13 +45,24 @@ public class Player : Character
             if (Input.GetMouseButtonDown(0))
             {
                 weapon.StartFire();
+                animator.SetBool("IsAttacking", true);
             }
             if (Input.GetMouseButtonUp(0))
             {
                 weapon.StopFire();
+                animator.SetBool("IsAttacking", false);
             }
         }
-        
+
+        if (moveDir.x != 0 || moveDir.y != 0)
+        {
+            if (animator.GetBool("IsMoving")) return;
+            animator.SetBool("IsMoving", true);
+        }
+        else if (animator.GetBool("IsMoving"))
+        {
+            animator.SetBool("Moving", false);
+        }
     }
 
     public override void TakeDamage(int damage)

@@ -3,13 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Sprite))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
 public class Character : MonoBehaviour
 {
     // References
-    private Sprite sprite;
     private Rigidbody2D rigidBody;
 
     // Stats
@@ -22,7 +19,6 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        sprite = this.GetComponent<Sprite>();
         rigidBody = this.GetComponent<Rigidbody2D>();
     }
     public Rigidbody2D getRigidBody()
@@ -46,8 +42,6 @@ public class Character : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        this.GetComponent<SpriteRenderer>().color = new Color(171 / 255.0f, 45 / 255.0f, 36 / 255.0f);
-        StartCoroutine(ResetSpriteColor());
         this.health -= damage;
         if (this.health <= 0)
         {
@@ -55,12 +49,6 @@ public class Character : MonoBehaviour
 
             Die();
         }
-    }
-
-    IEnumerator ResetSpriteColor()
-    {
-        yield return new WaitForSeconds(0.05f);
-        this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 
     public virtual void Die()
