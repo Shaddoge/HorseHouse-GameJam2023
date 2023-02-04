@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode()]
 public class ProgressBar : MonoBehaviour
 {
-    public int minimum;
     public int maximum;
     public int current = 0;
-    public Image mask;
-    public Image fill;
-    public Color color;
+    public Color startColor;
+    public Color fillColor;
+    [SerializeField] GameObject transition;
+    [SerializeField] Slider slider;
 
-
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
     private void OnEnable()
     {
         EventManager.Instance.enemyDeath += UpdateProgressBar;
@@ -22,13 +25,6 @@ public class ProgressBar : MonoBehaviour
     {
         EventManager.Instance.enemyDeath -= UpdateProgressBar;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,15 +33,14 @@ public class ProgressBar : MonoBehaviour
 
     void GetCurrentFill()
     {
-        float currentOffset = current - minimum;
-        float maximumOffset = maximum - minimum;
-        float fillAmount = currentOffset / maximumOffset;
-        mask.fillAmount = fillAmount;
+        slider.maxValue = maximum;
+        slider.value = current;
 
-        fill.color = color;
+        slider.fillRect.GetComponent<Image>().color = Color.Lerp(startColor, fillColor, slider.normalizedValue);
     }
     private void UpdateProgressBar(int progress, Vector2 position)
     {
+        Debug.Log("Entered Progress Bar");
         if(current == maximum)
         {
             current = 0;
@@ -53,8 +48,17 @@ public class ProgressBar : MonoBehaviour
             {
                 maximum -= 10;
             }
+            transition.SetActive(true);
+            StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
+
         }
         current += progress;
+    }
+
+    IEnumerator ResetTransition()
+    {
+        yield return new WaitForSeconds(5.0f);
+        transition.SetActive(false);
     }
 }
