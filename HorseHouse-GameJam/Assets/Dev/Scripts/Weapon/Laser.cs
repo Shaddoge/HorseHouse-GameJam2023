@@ -11,7 +11,10 @@ public class Laser : Projectile
     private LineRenderer lineRenderer;
 
     // Values
+    [SerializeField] private float dmgInterval = 0.1f;
     [SerializeField] private const float range = 15f;
+
+    private bool canDamage = true;
 
     private void Awake()
     {
@@ -25,14 +28,40 @@ public class Laser : Projectile
         Vector2 fireDir = (weapon.aimPos - (Vector2)weapon.FirePoint.position).normalized;
         Vector2 endPos = (Vector2)weapon.FirePoint.position + (fireDir * range);
 
-        RaycastHit2D hit = Physics2D.Linecast(weapon.FirePoint.position, endPos);
-        Debug.Log(weapon.transform.position);
-        if (hit.collider != null)
+        RaycastHit2D[] hit = Physics2D.LinecastAll(weapon.FirePoint.position, endPos);
+        
+        if (hit.Length > 0)
         {
-            RepositionLine(weapon.FirePoint.position, hit.point);
+            Vector2 wallHit = Vector2.zero;
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (hit[i].transform.gameObject.CompareTag("Enemy"))
+                {
+                    Enemy enemy = hit[i].transform.GetComponent<Enemy>();
+                    enemy.TakeDamage(damage);
+                    
+                    canDamage = false;
+                }
+                else if(hit[i].transform.gameObject.CompareTag("Wall"))
+                {
+                    wallHit = hit[i].point;
+                }
+            }
+            if (wallHit != Vector2.zero)
+            {
+                RepositionLine(weapon.FirePoint.position, wallHit);
+            }
+            else
+                RepositionLine(weapon.FirePoint.position, endPos);
         }
         else
             RepositionLine(weapon.FirePoint.position, endPos);
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        yield return new WaitForSeconds(dmgInterval);
+        canDamage = true;
     }
 
     public void RepositionLine(Vector2 startPos, Vector2 endPos)
