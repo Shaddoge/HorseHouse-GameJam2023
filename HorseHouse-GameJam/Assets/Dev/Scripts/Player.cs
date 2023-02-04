@@ -54,10 +54,8 @@ public class Player : Character
 
     public override void TakeDamage(int damage)
     {
-        Debug.Log("Take Damage: " + health);
         base.TakeDamage(damage);
         EventManager.Instance.UpdateHealth(health);
-        //EventManager.Instance.TakeDamage(health);
     }
     public override void Die()
     {
