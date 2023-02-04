@@ -41,4 +41,9 @@ public class UIManager : MonoBehaviour
             EventManager.Instance.GameStateChange(GameState.None);
         }
     }
+
+    public void OnMainMenuPressed() 
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
