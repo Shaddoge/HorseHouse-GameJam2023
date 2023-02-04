@@ -2,16 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeartSystem : MonoBehaviour
 {
-    public GameObject[] hearts;
-    private int life;
+    public Image[] hearts;
     public bool dead;
 
     private void Start()
     {
-        life = hearts.Length;
+
+    }
+    private void OnEnable()
+    {
+        EventManager.Instance.updateHealth += UpdateHealth;
+    }
+    private void OnDisable()
+    {
+        EventManager.Instance.updateHealth -= UpdateHealth;
     }
 
     void Update()
@@ -22,15 +30,14 @@ public class HeartSystem : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int d)
+    public void UpdateHealth(int health)
     {
-        if (life >= 1)
+        Debug.Log(health);
+        for(int i = 0; i < hearts.Length; i++)
         {
-            life -= d;
-            Destroy(hearts[life].gameObject); //[0]
-            if (life < 1)
+            if(i >= (health-1))
             {
-                dead = true;
+                hearts[i].GetComponent<Image>().sprite = null;
             }
         }
     }

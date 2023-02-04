@@ -31,10 +31,10 @@ public class Enemy : Character
         
         hpBar.GetComponent<EnemyHPBar>().SetHealth(this.health, this.maxHealth);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(1);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    TakeDamage(1);
+        //}
     }
 
     void Move()
@@ -68,6 +68,7 @@ public class Enemy : Character
         {
             //+Damage player
             currState = State.Attack;
+            EventManager.Instance.TakeDamage(1);
         }
     }
 

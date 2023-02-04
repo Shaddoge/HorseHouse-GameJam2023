@@ -13,13 +13,21 @@ public class Player : Character
 
     private void Start()
     {
+        Debug.Log("Player Health" + this.health);
         weapon = GameObject.FindGameObjectWithTag("Weapon").GetComponent<RangedWeapon>();
         if (weapon != null)
         {
             weapon.Setup(this);
         }
     }
-
+    private void OnEnable()
+    {
+        EventManager.Instance.takeDamage += TakeDamage;
+    }
+    private void OnDisable()
+    {
+        EventManager.Instance.takeDamage -= TakeDamage;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +50,18 @@ public class Player : Character
             }
         }
         
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        Debug.Log("Take Damage: " + health);
+        base.TakeDamage(damage);
+        EventManager.Instance.UpdateHealth(health);
+        //EventManager.Instance.TakeDamage(health);
+    }
+    public override void Die()
+    {
+        base.Die();
     }
 
 }

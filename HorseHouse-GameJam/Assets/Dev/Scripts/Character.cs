@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
         rigidBody.MovePosition(newPos);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         this.GetComponent<SpriteRenderer>().color = new Color(171 / 255.0f, 45 / 255.0f, 36 / 255.0f);
         StartCoroutine(ResetSpriteColor());
@@ -61,7 +61,7 @@ public class Character : MonoBehaviour
         this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 
-    void Die()
+    public virtual void Die()
     {
         Destroy(this.gameObject);
     }
