@@ -12,7 +12,8 @@ public class Character : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     // Stats
-    [SerializeField] private int health;
+    [SerializeField] protected int health;
+    [SerializeField] protected int maxHealth;
     [SerializeField] private float moveSpeed;
 
     // Movement
@@ -27,7 +28,6 @@ public class Character : MonoBehaviour
     {
         return this.rigidBody;
     }
-
     public float getMovespeed()
     {
         return this.moveSpeed;

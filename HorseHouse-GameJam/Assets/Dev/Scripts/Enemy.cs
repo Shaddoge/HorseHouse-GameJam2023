@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : Character
 {
     [SerializeField] Player player;
+    [SerializeField] public GameObject hpBar;
     enum State { Move, Attack};
     State currState = State.Move;
 
@@ -26,15 +27,23 @@ public class Enemy : Character
             case State.Move: Move(); break;
             case State.Attack: Attack(); break;
         }
+
+        
+        hpBar.GetComponent<EnemyHPBar>().SetHealth(this.health, this.maxHealth);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            TakeDamage(1);
+        }
     }
 
     void Move()
     {
         Vector2 playerDir = player.transform.position - this.transform.position;
-        moveDir.x = playerDir.x * getMovespeed(); //Change to move speed
+        moveDir.x = playerDir.x * getMovespeed(); 
         moveDir.y = playerDir.y * getMovespeed();
         float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
-        this.getRigidBody().rotation = angle;
+        //this.getRigidBody().rotation = angle;
         ticks = 0.0f;
     }
 
