@@ -35,9 +35,13 @@ public class HeartSystem : MonoBehaviour
         Debug.Log(health);
         for(int i = 0; i < hearts.Length; i++)
         {
-            if(i >= (health-1))
+            if(i < health)
             {
-                hearts[i].GetComponent<Image>().sprite = null;
+                hearts[i].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            }
+            else
+            {
+                hearts[i].GetComponent<Image>().color = new Color32(255, 255, 255, 0);
             }
         }
     }
