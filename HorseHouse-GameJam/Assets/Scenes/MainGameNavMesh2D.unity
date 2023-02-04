@@ -52538,6 +52538,17 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &1540116384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8627211275920683485, guid: f5d7ebab6ecf4cf4a833aeb690d76c29, type: 3}
+  m_PrefabInstance: {fileID: 255582560}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6656d103d9652d41ae8099180891bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1642021117
 GameObject:
   m_ObjectHideFlags: 0
@@ -52696,6 +52707,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2113581114616811112, guid: 989ce4f47d26a414a901190209077376, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1540116384}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_Name
       value: Enemy

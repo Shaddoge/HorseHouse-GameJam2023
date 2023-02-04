@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Character
 {
+    private Vector3 target;
+    NavMeshAgent agent;
+
     [SerializeField] Player player;
     [SerializeField] public GameObject hpBar;
     enum State { Move, Attack };
@@ -15,11 +19,20 @@ public class Enemy : Character
 
     Action<Enemy> killAction;
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        /*agent.updateRotation = false;
+        agent.updateUpAxis = false;*/
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         setMovespeed(UnityEngine.Random.Range(0.5f, 0.8f));
+
+
     }
 
     // Update is called once per frame
@@ -37,14 +50,17 @@ public class Enemy : Character
 
     void Move()
     {
-        /*Vector2 playerDir = player.transform.position - this.transform.position;
-        moveDir.x = playerDir.x * getMovespeed();
-        moveDir.y = playerDir.y * getMovespeed();
-        float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
-        //this.getRigidBody().rotation = angle;
-        ticks = 0.0f;*/
+        //Vector2 playerDir = player.transform.position - this.transform.position;
+        //moveDir.x = playerDir.x * getMovespeed();
+        //moveDir.y = playerDir.y * getMovespeed();
+        //float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+        ////this.getRigidBody().rotation = angle;
+        //ticks = 0.0f;
 
+        target = player.transform.position;
 
+        agent.SetDestination(target);
+        Debug.Log("destination changed");
     }
 
     void Attack()
@@ -100,5 +116,10 @@ public class Enemy : Character
     public void Init(Action<Enemy> _killAction)
     {
         killAction = _killAction;
+    }
+
+    public override void FixedUpdate()
+    {
+        return;
     }
 }
