@@ -183,6 +183,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  moveSpeed: 5
+  moveSpeed: 0.5
   player: {fileID: 0}
-  rigidBody: {fileID: 0}

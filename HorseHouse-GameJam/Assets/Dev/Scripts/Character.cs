@@ -23,7 +23,20 @@ public class Character : MonoBehaviour
         sprite = this.GetComponent<Sprite>();
         rigidBody = this.GetComponent<Rigidbody2D>();
     }
+    public Rigidbody2D getRigidBody() 
+    {
+        return this.rigidBody;
+    }
 
+    public float getMovespeed()
+    {
+        return this.moveSpeed;
+    }
+
+    public void setMovespeed(float speed)
+    {
+        this.moveSpeed = speed;
+    }
     private void FixedUpdate()
     {
         Vector2 newPos = rigidBody.position + (moveDir * moveSpeed * Time.fixedDeltaTime);
