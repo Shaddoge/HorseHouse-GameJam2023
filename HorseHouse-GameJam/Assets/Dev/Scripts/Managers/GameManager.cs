@@ -8,7 +8,7 @@ public enum GameState
 {
     None,
     Paused,
-    GameOver
+    GameOver,
 }
 [Serializable]
 public enum Era
@@ -64,6 +64,9 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Game Over");
+            state = GameState.GameOver;
         }
+        Debug.Log("Era Changed: " + currentEra);
+
     }
 }

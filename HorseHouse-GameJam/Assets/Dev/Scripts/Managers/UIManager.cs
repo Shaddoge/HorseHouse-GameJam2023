@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject PausePanel;
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject gameOverPanel;
     public void OnPlayPressed()
     {
         SceneManager.LoadScene(1);
@@ -21,8 +22,11 @@ public class UIManager : MonoBehaviour
 
     public void OnPausePressed()
     {
-        if(!PausePanel.activeSelf && GameManager.Instance.State != GameState.GameOver) { 
-            PausePanel.SetActive(true);
+        if(!pausePanel.activeSelf) { 
+            if (GameManager.Instance.State != GameState.GameOver)
+            {
+                pausePanel.SetActive(true);
+            }   
             Time.timeScale = 0.0f;
             EventManager.Instance.GameStateChange(GameState.Paused);
         }
@@ -30,9 +34,9 @@ public class UIManager : MonoBehaviour
 
     public void OnResumePressed()
     {
-        if (PausePanel.activeSelf)
+        if (pausePanel.activeSelf)
         {
-            PausePanel.SetActive(false);
+            pausePanel.SetActive(false);
             Time.timeScale = 1.0f;
             EventManager.Instance.GameStateChange(GameState.None);
         }

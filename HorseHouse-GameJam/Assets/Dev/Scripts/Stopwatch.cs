@@ -19,6 +19,10 @@ public class Stopwatch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.State == GameState.GameOver)
+        {
+            SetStopWatch(false);
+        }
         if (stopwatchActive)
         {
             currTime = currTime + Time.deltaTime;
