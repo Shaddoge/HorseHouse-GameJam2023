@@ -33,11 +33,6 @@ public class Enemy : Character
 
 
         hpBar.GetComponent<EnemyHPBar>().SetHealth(this.health, this.maxHealth);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(1);
-        }
     }
 
     void Move()
@@ -94,7 +89,7 @@ public class Enemy : Character
     {
 
         killAction(this);
-
+        EventManager.Instance.EnemyDeath(1, transform.position);
         health = maxHealth;
     }
 
