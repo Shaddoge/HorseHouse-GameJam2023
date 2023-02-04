@@ -591,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &101307136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_TagString
@@ -52330,7 +52330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_TagString
@@ -52411,7 +52411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2113581114616811115, guid: 989ce4f47d26a414a901190209077376, type: 3}
       propertyPath: m_TagString
@@ -52624,6 +52624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  wallHitVFX: {fileID: 0}
   dmgInterval: 0.1
 --- !u!1 &1860982240
 GameObject:

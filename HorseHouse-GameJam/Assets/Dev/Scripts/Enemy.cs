@@ -92,6 +92,7 @@ public class Enemy : Character
         killAction(this);
         EventManager.Instance.EnemyDeath(1, transform.position);
         health = maxHealth;
+        this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 
     public void Init(Action<Enemy> _killAction)

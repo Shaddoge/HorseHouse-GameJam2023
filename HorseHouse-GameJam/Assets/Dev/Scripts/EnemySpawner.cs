@@ -43,7 +43,13 @@ public class EnemySpawner : MonoBehaviour
         {
             var enemy = pool.Get();
 
-            enemy.transform.position = this.transform.position;
+            Vector2 newPosition;
+            newPosition.x = this.transform.position.x;
+            newPosition.y = this.transform.position.y;
+
+            newPosition += Random.insideUnitCircle * 2;
+
+            enemy.transform.position = newPosition;
 
             enemy.Init(KillEnemy);
         }
