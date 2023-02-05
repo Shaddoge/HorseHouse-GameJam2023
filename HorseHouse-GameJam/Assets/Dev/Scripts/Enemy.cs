@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : Character
 {
+    [SerializeField]
+    private List<Sprite> sprites = new();
     private Vector3 target;
     NavMeshAgent agent;
     private SpriteRenderer sprite;
@@ -32,7 +34,18 @@ public class Enemy : Character
 
     private void OnEnable()
     {
-        origColor = sprite.color;
+        switch (GameManager.Instance.CurrentEra)
+        {
+            case Era.Space:
+                sprite.sprite = sprites[0];
+                break;
+            case Era.Modern:
+                sprite.sprite = sprites[1];
+                break;
+            case Era.Stone:
+                sprite.sprite = sprites[2];
+                break;
+        }
     }
 
     // Start is called before the first frame update
