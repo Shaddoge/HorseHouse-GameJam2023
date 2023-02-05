@@ -53,6 +53,7 @@ public class ProgressBar : MonoBehaviour
             }
             transition.SetActive(true);
             barCounter++;
+            //EventManager.Instance.ChangePlayerUI(barCounter);
             StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
 

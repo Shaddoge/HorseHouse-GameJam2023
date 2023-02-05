@@ -8,7 +8,7 @@ public class Player : Character
     // References
     private RangedWeapon weapon = null;
     private Animator animator = null;
-
+    [SerializeField] GameObject[] weapons;
     // Values
     [HideInInspector] public Vector2 pointerPos = Vector3.zero;
 
@@ -25,10 +25,12 @@ public class Player : Character
     private void OnEnable()
     {
         EventManager.Instance.takeDamage += TakeDamage;
+        EventManager.Instance.changePlayerUI += ChangePlayerUI;
     }
     private void OnDisable()
     {
         EventManager.Instance.takeDamage -= TakeDamage;
+        EventManager.Instance.changePlayerUI -= ChangePlayerUI;
     }
     // Update is called once per frame
     void Update()
@@ -81,5 +83,13 @@ public class Player : Character
         Debug.Log("Player Dead");
         //base.Die();
     }
-
+    private void ChangePlayerUI(int counter)
+    {
+        //Change weapons supposedly, will come back later
+        if (weapons[counter] != null)
+        {
+            weapons[counter - 1].SetActive(false);
+            weapons[counter].SetActive(true);
+        }
+    }
 }

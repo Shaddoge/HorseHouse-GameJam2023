@@ -34,6 +34,8 @@ public class EventManager : MonoBehaviour
     public void IsTransitioning() { isTransitioning?.Invoke(); }
     public event Action changeHealthIcon;
     public void ChangeHealthIcon() { changeHealthIcon?.Invoke(); }
+    public event Action<int> changePlayerUI;
+    public void ChangePlayerUI(int counter) { changePlayerUI?.Invoke(counter); }
     #endregion
 
 }
