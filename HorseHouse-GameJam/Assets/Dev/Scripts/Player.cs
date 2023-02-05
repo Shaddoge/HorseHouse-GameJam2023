@@ -8,7 +8,7 @@ public class Player : Character
     // References
     private RangedWeapon weapon = null;
     private Animator animator = null;
-    [SerializeField] GameObject[] weapons;
+    [SerializeField] GameObject[] playerSprites;
     // Values
     [HideInInspector] public Vector2 pointerPos = Vector3.zero;
 
@@ -85,11 +85,11 @@ public class Player : Character
     }
     private void ChangePlayerUI(int counter)
     {
-        //Change weapons supposedly, will come back later
-        if (weapons[counter] != null)
+        if (playerSprites[counter] != null)
         {
-            weapons[counter - 1].SetActive(false);
-            weapons[counter].SetActive(true);
+            weapon.gameObject.SetActive(false);
+            playerSprites[counter-1].SetActive(false);
+            playerSprites[counter].SetActive(true);
         }
     }
 }

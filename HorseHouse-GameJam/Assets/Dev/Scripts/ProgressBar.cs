@@ -53,7 +53,7 @@ public class ProgressBar : MonoBehaviour
             }
             transition.SetActive(true);
             barCounter++;
-            //EventManager.Instance.ChangePlayerUI(barCounter);
+            
             StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
 
@@ -67,5 +67,6 @@ public class ProgressBar : MonoBehaviour
         transition.SetActive(false);
         this.gameObject.GetComponentInChildren<Image>().sprite = barBorder[barCounter];
         EventManager.Instance.ChangeHealthIcon();
+        EventManager.Instance.ChangePlayerUI(barCounter);
     }
 }
