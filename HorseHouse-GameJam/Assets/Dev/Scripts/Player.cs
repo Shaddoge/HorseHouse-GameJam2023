@@ -39,6 +39,12 @@ public class Player : Character
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane);
         pointerPos = Camera.main.ScreenToWorldPoint(mousePos);
 
+        Vector3 viewportPos = (Camera.main.ScreenToViewportPoint(mousePos) * 2.0f) - Vector3.one;
+        animator.SetFloat("X", viewportPos.x); 
+        animator.SetFloat("Y", viewportPos.y);
+
+        transform.localScale = new Vector3(Mathf.Sign(viewportPos.x), 1, 1);
+
         if (weapon != null)
         {
             weapon.SetAimPos(pointerPos);
@@ -61,7 +67,7 @@ public class Player : Character
         }
         else if (animator.GetBool("IsMoving"))
         {
-            animator.SetBool("Moving", false);
+            animator.SetBool("IsMoving", false);
         }
     }
 
