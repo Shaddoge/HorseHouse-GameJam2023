@@ -57229,7 +57229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximum: 30
-  current: 29
+  current: 0
   startColor: {r: 0.64460915, g: 1, b: 0.44716978, a: 1}
   fillColor: {r: 0.42274594, g: 0.6886792, b: 0.18451403, a: 1}
   barBorder:
@@ -57243,6 +57243,7 @@ MonoBehaviour:
   - {fileID: 290280487}
   - {fileID: 520919204}
   laser: {fileID: 594251500}
+  gameOver: {fileID: 1713889000}
 --- !u!114 &1355117571
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class VolumeHandler : MonoBehaviour
         
     }
 
-    void Shift()
+    void Shift(int era)
     {
         switch (GameManager.Instance.CurrentEra)
         {

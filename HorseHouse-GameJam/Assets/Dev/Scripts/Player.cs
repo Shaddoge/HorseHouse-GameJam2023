@@ -36,7 +36,6 @@ public class Player : Character
     {
         weapon.gameObject.SetActive(false);
         weapon = weapons[era];
-
         weapon.gameObject.SetActive(true);
     }
 

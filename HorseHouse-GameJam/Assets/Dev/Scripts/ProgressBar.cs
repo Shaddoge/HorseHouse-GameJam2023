@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] Slider slider;
     public GameObject[] playerSprites;
     public GameObject laser;
+    public GameObject gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +73,18 @@ public class ProgressBar : MonoBehaviour
         //{
         //    laser.SetActive(false);
         //}
-        playerSprites[barCounter-1].gameObject.SetActive(false);
-        playerSprites[barCounter].gameObject.SetActive(true);
-        this.gameObject.GetComponentInChildren<Image>().sprite = barBorder[barCounter];
+        if (barCounter == 3)
+        {
+            gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "You Win";
+            gameOver.SetActive(true);
+        }
+        if(barCounter!= 3)
+        {
+            playerSprites[barCounter - 1].gameObject.SetActive(false);
+            playerSprites[barCounter].gameObject.SetActive(true);
+            this.gameObject.GetComponentInChildren<Image>().sprite = barBorder[barCounter];
+        }
+        
         EventManager.Instance.ChangeHealthIcon();
     }
 }

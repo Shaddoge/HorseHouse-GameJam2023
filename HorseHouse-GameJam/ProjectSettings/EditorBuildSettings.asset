@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 832c9584ca1876647b38f51ece7da0f7
   - enabled: 1
+    path: Assets/Scenes/MainGame.unity
+    guid: 1e459d5abce0fb04ab933a6595ad4ef3
+  - enabled: 0
     path: Assets/Scenes/Camera-Test.unity
     guid: 3159e178c7f2de745ade1ebd331d90af
   m_configObjects: {}
