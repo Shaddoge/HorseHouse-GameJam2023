@@ -30,8 +30,15 @@ public class BulletWeapon : RangedWeapon
         if (!canFire) return;
         canFire = false;
         StartCoroutine(SimulateBullet());
-        muzzleVFX.Emit(12);
-        smokeVFX.Emit(5);
+        if (muzzleVFX != null)
+        {
+            muzzleVFX.Emit(12);
+        }
+        if(smokeVFX != null)
+        {
+            smokeVFX.Emit(5);
+        }
+        
     }
 
     public override void OnUpdate()

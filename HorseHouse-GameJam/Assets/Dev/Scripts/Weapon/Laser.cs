@@ -79,7 +79,7 @@ public class Laser : Projectile
             if (enemyHit)
             {
                 canDamage = false;
-                if (damageCD == null)
+                if (damageCD == null && this.gameObject.active)
                     damageCD = StartCoroutine(DamageCooldown());
             }
         }

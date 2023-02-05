@@ -6,12 +6,12 @@ using UnityEngine;
 public class Player : Character
 {
     // References
+    [SerializeField] private RangedWeapon[] weapons;
     private RangedWeapon weapon = null;
     private Animator animator = null;
-    [SerializeField] GameObject[] playerSprites;
     // Values
     [HideInInspector] public Vector2 pointerPos = Vector3.zero;
-
+    [SerializeField] GameObject gameOver;
     private void Start()
     {
         Debug.Log("Player Health" + this.health);
@@ -25,13 +25,21 @@ public class Player : Character
     private void OnEnable()
     {
         EventManager.Instance.takeDamage += TakeDamage;
-        EventManager.Instance.changePlayerUI += ChangePlayerUI;
+        EventManager.Instance.isTransitioning += ChangeWeapon;
     }
     private void OnDisable()
     {
         EventManager.Instance.takeDamage -= TakeDamage;
-        EventManager.Instance.changePlayerUI -= ChangePlayerUI;
+        EventManager.Instance.isTransitioning -= ChangeWeapon;
     }
+    private void ChangeWeapon(int era)
+    {
+        weapon.gameObject.SetActive(false);
+        weapon = weapons[era];
+
+        weapon.gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -46,7 +54,6 @@ public class Player : Character
         animator.SetFloat("Y", viewportPos.y);
 
         transform.localScale = new Vector3(Mathf.Sign(viewportPos.x), 1, 1);
-
         if (weapon != null)
         {
             weapon.SetAimPos(pointerPos);
@@ -61,7 +68,7 @@ public class Player : Character
                 animator.SetBool("IsAttacking", false);
             }
         }
-
+        
         if (moveDir.x != 0 || moveDir.y != 0)
         {
             if (animator.GetBool("IsMoving")) return;
@@ -81,15 +88,7 @@ public class Player : Character
     public override void Die()
     {
         Debug.Log("Player Dead");
+        gameOver.SetActive(true);
         //base.Die();
-    }
-    private void ChangePlayerUI(int counter)
-    {
-        if (playerSprites[counter] != null)
-        {
-            weapon.gameObject.SetActive(false);
-            playerSprites[counter-1].SetActive(false);
-            playerSprites[counter].SetActive(true);
-        }
     }
 }

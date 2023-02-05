@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         if(currentEra!=Era.Stone)
         {
             currentEra++;
-            EventManager.Instance.IsTransitioning();
+            EventManager.Instance.IsTransitioning((int)currentEra);
         }
         else
         {

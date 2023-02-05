@@ -29,7 +29,7 @@ public class SpawnerManager : MonoBehaviour
         spawners[0].SetActive(true);
     }
 
-    public void IsTransitioning()
+    public void IsTransitioning(int era)
     {
         GameObject[] allEnemies;
 

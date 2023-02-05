@@ -30,12 +30,10 @@ public class EventManager : MonoBehaviour
     public void UpdateHealth(int health) { updateHealth?.Invoke(health); }
     public event Action<int,Vector2> enemyDeath;
     public void EnemyDeath(int progress, Vector2 position) { enemyDeath?.Invoke(progress, position); }
-    public event Action isTransitioning;
-    public void IsTransitioning() { isTransitioning?.Invoke(); }
+    public event Action<int> isTransitioning;
+    public void IsTransitioning(int eraIndex) { isTransitioning?.Invoke(eraIndex); }
     public event Action changeHealthIcon;
     public void ChangeHealthIcon() { changeHealthIcon?.Invoke(); }
-    public event Action<int> changePlayerUI;
-    public void ChangePlayerUI(int counter) { changePlayerUI?.Invoke(counter); }
     #endregion
 
 }

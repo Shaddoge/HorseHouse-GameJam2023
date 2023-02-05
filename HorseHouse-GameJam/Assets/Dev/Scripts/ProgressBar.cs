@@ -14,6 +14,8 @@ public class ProgressBar : MonoBehaviour
     private int barCounter = 0;
     [SerializeField] GameObject transition;
     [SerializeField] Slider slider;
+    public GameObject[] playerSprites;
+    public GameObject laser;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +55,6 @@ public class ProgressBar : MonoBehaviour
             }
             transition.SetActive(true);
             barCounter++;
-            
             StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
 
@@ -65,8 +66,14 @@ public class ProgressBar : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         transition.SetActive(false);
+
+        //if (laser.activeSelf)
+        //{
+        //    laser.SetActive(false);
+        //}
+        playerSprites[barCounter-1].gameObject.SetActive(false);
+        playerSprites[barCounter].gameObject.SetActive(true);
         this.gameObject.GetComponentInChildren<Image>().sprite = barBorder[barCounter];
         EventManager.Instance.ChangeHealthIcon();
-        EventManager.Instance.ChangePlayerUI(barCounter);
     }
 }
