@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class ProgressBar : MonoBehaviour
     public int current = 0;
     public Color startColor;
     public Color fillColor;
+    public Sprite[] barBorder;
+    private int barCounter = 0;
     [SerializeField] GameObject transition;
     [SerializeField] Slider slider;
 
@@ -49,8 +52,7 @@ public class ProgressBar : MonoBehaviour
                 maximum -= 10;
             }
             transition.SetActive(true);
-            //In Case of Emergencies
-            //EventManager.Instance.IsTransitioning();
+            barCounter++;
             StartCoroutine(ResetTransition());
             GameManager.Instance.ChangeEra();
 
@@ -62,5 +64,7 @@ public class ProgressBar : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         transition.SetActive(false);
+        this.gameObject.GetComponentInChildren<Image>().sprite = barBorder[barCounter];
+        EventManager.Instance.ChangeHealthIcon();
     }
 }
