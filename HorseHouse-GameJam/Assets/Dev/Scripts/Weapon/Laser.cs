@@ -9,11 +9,13 @@ public class Laser : Projectile
     // References
     private LaserWeapon weapon;
     private LineRenderer lineRenderer;
-    [SerializeField] private ParticleSystem wallHitVFX;
+    [SerializeField] private GameObject wallHitVFX;
 
     // Values
     [SerializeField] private float dmgInterval = 0.1f;
     [SerializeField] private const float range = 15f;
+
+    private Coroutine damageCD = null;
 
     private bool canDamage = true;
 
@@ -21,6 +23,14 @@ public class Laser : Projectile
     {
         weapon = GetComponentInParent<LaserWeapon>();
         lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void OnDisable()
+    {
+        if (damageCD != null)
+        {
+            StopCoroutine(damageCD);
+        }
     }
 
     private void Update()
@@ -69,7 +79,8 @@ public class Laser : Projectile
             if (enemyHit)
             {
                 canDamage = false;
-                StartCoroutine(DamageCooldown());
+                if (damageCD == null)
+                    damageCD = StartCoroutine(DamageCooldown());
             }
         }
         else
@@ -83,6 +94,7 @@ public class Laser : Projectile
     {
         yield return new WaitForSeconds(dmgInterval);
         canDamage = true;
+        damageCD = null;
     }
 
     public void RepositionLine(Vector2 startPos, Vector2 endPos)
@@ -94,6 +106,6 @@ public class Laser : Projectile
     public void ToggleLaser(bool flag)
     {
         lineRenderer.enabled = flag;
-        wallHitVFX.gameObject.SetActive(flag);
+        wallHitVFX.SetActive(flag);
     }
 }
