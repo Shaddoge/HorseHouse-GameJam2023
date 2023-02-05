@@ -9818,6 +9818,7 @@ MonoBehaviour:
   damage: 1
   wallHitVFX: {fileID: 5194104359575644366}
   dmgInterval: 0.1
+  fireSFX: {fileID: 8300000, guid: 8fb8f05f0951ad44d819e5696fdbd9b9, type: 3}
 --- !u!120 &6755983657182104670
 LineRenderer:
   serializedVersion: 2

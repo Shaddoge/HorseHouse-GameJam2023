@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class BulletWeapon : RangedWeapon
 {
     [SerializeField] private Bullet bullet;
     [SerializeField] private float fireRate = 0.2f;
     [SerializeField] private ParticleSystem muzzleVFX;
     [SerializeField] private ParticleSystem smokeVFX;
+    [SerializeField] private AudioClip fireSFX;
+
+    private AudioSource source;
 
     private float cdTicks = 0.0f;
     private bool canFire = true;
@@ -20,6 +24,7 @@ public class BulletWeapon : RangedWeapon
             Shoot();
         }
     }
+
     public override void StopFire()
     {
         base.StopFire();
@@ -34,11 +39,12 @@ public class BulletWeapon : RangedWeapon
         {
             muzzleVFX.Emit(12);
         }
-        if(smokeVFX != null)
+        if (smokeVFX != null)
         {
             smokeVFX.Emit(5);
         }
-        
+
+        AudioManager.Instance.PlaySFX(fireSFX, UnityEngine.Random.Range(0.3f, 0.7f));
     }
 
     public override void OnUpdate()

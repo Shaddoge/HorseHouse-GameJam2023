@@ -6,7 +6,7 @@ public class LaserWeapon : RangedWeapon
 {
     // Laser instance
     [SerializeField] private Laser laser;
-    
+
     private bool canDamage = true;
     
     public override void StartFire()

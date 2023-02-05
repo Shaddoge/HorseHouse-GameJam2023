@@ -14,6 +14,7 @@ public class Enemy : Character
 
     [SerializeField] Player player;
     [SerializeField] public GameObject hpBar;
+    [SerializeField] private AudioClip dieSFX;
     enum State { Move, Attack };
     State currState = State.Move;
 
@@ -25,7 +26,7 @@ public class Enemy : Character
     private Color32 origColor;
 
     public int damage = 1;
-
+    
     private void Awake()
     {
         sprite = this.GetComponent<SpriteRenderer>();
@@ -70,17 +71,9 @@ public class Enemy : Character
 
     void Move()
     {
-        //Vector2 playerDir = player.transform.position - this.transform.position;
-        //moveDir.x = playerDir.x * getMovespeed();
-        //moveDir.y = playerDir.y * getMovespeed();
-        //float angle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
-        ////this.getRigidBody().rotation = angle;
-        //ticks = 0.0f;
-
         target = player.transform.position;
 
         agent.SetDestination(target);
-        Debug.Log("destination changed");
     }
 
     void Attack()
@@ -91,8 +84,6 @@ public class Enemy : Character
         ticks += Time.deltaTime;
         if (ticks >= INTERVAL)
         {
-            Debug.Log("Attack Player");
-            //+Damage player
             ticks = 0.0f;
             EventManager.Instance.TakeDamage(this.damage);
         }
@@ -103,7 +94,6 @@ public class Enemy : Character
 
         if (collision.gameObject.tag == "Player")
         {
-            //+Damage player
             currState = State.Attack;
         }
     }
@@ -133,7 +123,8 @@ public class Enemy : Character
 
     public override void Die()
     {
-
+        if (dieSFX != null)
+            AudioManager.Instance.PlaySFX(dieSFX, UnityEngine.Random.Range(0.3f, 0.8f));
         killAction(this);
         EventManager.Instance.EnemyDeath(1, transform.position);
         health = maxHealth;

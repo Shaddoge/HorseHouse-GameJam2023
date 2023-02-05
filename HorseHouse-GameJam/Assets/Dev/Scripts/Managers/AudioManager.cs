@@ -51,6 +51,11 @@ public class AudioManager : MonoBehaviour
         cameraSource.PlayOneShot(clip);
     }
 
+    public void PlaySFX(AudioClip clip, float vol)
+    {
+        cameraSource.PlayOneShot(clip, vol);
+    }
+
     public void PlaySFXFromSource(AudioClip clip, AudioSource source)
     {
         source.PlayOneShot(clip);

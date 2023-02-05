@@ -16,8 +16,11 @@ public class Laser : Projectile
     [SerializeField] private const float range = 15f;
 
     private Coroutine damageCD = null;
-
     private bool canDamage = true;
+    private float fireSFXTick = 0.0f;
+    private float fireSFXInterval = 0.03f;
+    [SerializeField] private AudioClip fireSFX;
+
 
     private void Awake()
     {
@@ -36,6 +39,13 @@ public class Laser : Projectile
     private void Update()
     {
         if (!lineRenderer.enabled) return;
+        fireSFXTick += Time.deltaTime;
+        if (fireSFXTick > fireSFXInterval)
+        {
+            fireSFXTick = 0.0f;
+            AudioManager.Instance.PlaySFX(fireSFX, UnityEngine.Random.Range(0.3f, 0.5f));
+        }
+
         Vector2 fireDir = (weapon.aimPos - (Vector2)weapon.FirePoint.position).normalized;
         Vector2 endPos = (Vector2)weapon.FirePoint.position + (fireDir * range);
         // Linecast
