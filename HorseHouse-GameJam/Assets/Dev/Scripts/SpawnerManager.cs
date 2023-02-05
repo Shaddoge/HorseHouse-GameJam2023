@@ -43,7 +43,13 @@ public class SpawnerManager : MonoBehaviour
         spawners[levelCount].SetActive(false);
 
         levelCount++;
+        StartCoroutine(ResetTransition());
+        
+    }
 
+    IEnumerator ResetTransition()
+    {
+        yield return new WaitForSeconds(5.0f);
         spawners[levelCount].SetActive(true);
     }
 }
