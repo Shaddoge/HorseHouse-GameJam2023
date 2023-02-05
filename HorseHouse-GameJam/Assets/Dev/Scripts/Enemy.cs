@@ -24,6 +24,8 @@ public class Enemy : Character
 
     private Color32 origColor;
 
+    public int damage = 1;
+
     private void Awake()
     {
         sprite = this.GetComponent<SpriteRenderer>();
@@ -92,7 +94,7 @@ public class Enemy : Character
             Debug.Log("Attack Player");
             //+Damage player
             ticks = 0.0f;
-            EventManager.Instance.TakeDamage(1);
+            EventManager.Instance.TakeDamage(this.damage);
         }
     }
 
