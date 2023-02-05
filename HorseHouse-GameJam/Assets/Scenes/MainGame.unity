@@ -1368,8 +1368,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f9bc18e598b01824d89f65f588e4dae2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -54060,6 +54060,10 @@ MonoBehaviour:
   current: 0
   startColor: {r: 0.64460915, g: 1, b: 0.44716978, a: 1}
   fillColor: {r: 0.42274594, g: 0.6886792, b: 0.18451403, a: 1}
+  barBorder:
+  - {fileID: 21300000, guid: f9bc18e598b01824d89f65f588e4dae2, type: 3}
+  - {fileID: 21300000, guid: 787a2c45987782d4ab27571577d70403, type: 3}
+  - {fileID: 21300000, guid: 2a677d1db18a34442bbd259297af819b, type: 3}
   transition: {fileID: 132672106}
   slider: {fileID: 1355117571}
 --- !u!114 &1355117571
@@ -54486,6 +54490,10 @@ MonoBehaviour:
   - {fileID: 1716140816}
   - {fileID: 1012617331}
   - {fileID: 3453246}
+  heartAssets:
+  - {fileID: 21300000, guid: 9015f12ac3149214fa882c34ba2a35b7, type: 3}
+  - {fileID: 21300000, guid: 0df966446e1631445ac9b30a53271cb4, type: 3}
+  - {fileID: 21300000, guid: ee4fdcec550de294a839f96c53848445, type: 3}
 --- !u!1 &1704223797
 GameObject:
   m_ObjectHideFlags: 0
