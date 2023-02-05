@@ -39,7 +39,7 @@ public class Enemy : Character
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        setMovespeed(UnityEngine.Random.Range(0.5f, 0.8f));
+        //setMovespeed(UnityEngine.Random.Range(0.5f, 0.8f));
     }
 
     // Update is called once per frame
@@ -122,7 +122,7 @@ public class Enemy : Character
         killAction(this);
         EventManager.Instance.EnemyDeath(1, transform.position);
         health = maxHealth;
-        this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
+        //this.GetComponent<SpriteRenderer>().color = new Color(245 / 255.0f, 119 / 255.0f, 110 / 255.0f);
     }
 
     public void Init(Action<Enemy> _killAction)
@@ -137,8 +137,8 @@ public class Enemy : Character
 
     private IEnumerator DamageFeedback()
     {
-        sprite.color = new Color32(230, 60, 60, 255);
+        //sprite.color = new Color32(230, 60, 60, 255);
         yield return new WaitForSeconds(0.05f);
-        sprite.color = origColor;
+        //sprite.color = origColor;
     }
 }
